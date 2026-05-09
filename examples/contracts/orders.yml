@@ -1,0 +1,35 @@
+name: orders
+description: One row per customer order. Owned by the data platform team.
+source:
+  type: csv
+  path: ../data/orders.csv
+freshness:
+  column: created_at
+  max_age: 7d
+  severity: warn
+columns:
+  - name: order_id
+    dtype: integer
+    nullable: false
+    unique: true
+  - name: customer_id
+    dtype: integer
+    nullable: false
+  - name: amount
+    dtype: float
+    min: 0
+  - name: status
+    dtype: string
+    allowed_values: [pending, paid, shipped, cancelled]
+  - name: created_at
+    dtype: datetime
+    nullable: false
+checks:
+  - type: relationship
+    column: customer_id
+    references:
+      contract: customers
+      column: customer_id
+  - type: expression
+    description: paid orders must carry a positive amount
+    expression: "not (status == 'paid' and amount <= 0)"

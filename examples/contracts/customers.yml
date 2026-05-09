@@ -1,0 +1,22 @@
+name: customers
+description: Master list of customers. One row per customer, owned by the CRM team.
+source:
+  type: csv
+  path: ../data/customers.csv
+columns:
+  - name: customer_id
+    dtype: integer
+    nullable: false
+    unique: true
+  - name: email
+    dtype: string
+    nullable: false
+    regex: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
+  - name: country
+    dtype: string
+    allowed_values: [GB, IE, FR, DE, US]
+  - name: signup_date
+    dtype: datetime
+checks:
+  - type: row_count
+    min: 1
