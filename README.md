@@ -69,16 +69,12 @@ pactum exits non-zero, so the CI job goes red.
 ## Install
 
 ```bash
-pip install pactum
-```
-
-From source:
-
-```bash
 git clone https://github.com/R4SHM1T/pactum
 cd pactum
 pip install -e ".[dev]"
 ```
+
+A packaged PyPI release is on the roadmap; for now it installs from source.
 
 ## Quick start
 
@@ -139,7 +135,7 @@ pactum check orders.yml --format html --output report.html
 ### In GitHub Actions
 
 ```yaml
-- run: pip install pactum
+- run: pip install git+https://github.com/R4SHM1T/pactum
 - run: pactum check-suite contracts/
 ```
 
