@@ -14,6 +14,10 @@ a column that had silently changed type overnight. The checks were always the
 same handful of questions (is it unique? is it null? does this id exist in the
 other table?), so I wrote them down once in a form a machine could enforce.
 
+pactum guards the *input* to an analytics stack. Its companion project,
+[metricsmith](https://github.com/R4SHM1T/metricsmith), governs the *output*: one
+trusted definition per metric, compiled to SQL. Contracts in, metrics out.
+
 ```yaml
 # contracts/orders.yml
 name: orders
